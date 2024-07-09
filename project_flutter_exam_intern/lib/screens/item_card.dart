@@ -14,15 +14,15 @@ class ItemCard extends StatelessWidget {
         );
       },
       child: Card(
-        color: Colors.red[100],
+        color: Colors.red[300],
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.fastfood, size: 50),
+            Icon(Icons.fastfood, size: 50, color: Colors.white),
             SizedBox(height: 8),
-            Text('ITEM NAME', style: TextStyle(fontWeight: FontWeight.bold)),
+            Text('ITEM NAME', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
             SizedBox(height: 4),
-            Text('100.-', style: TextStyle(color: Colors.redAccent)),
+            Text('100.-', style: TextStyle(color: Colors.white)),
           ],
         ),
       ),

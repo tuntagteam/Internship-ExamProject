@@ -12,54 +12,59 @@ class POSPage extends StatelessWidget {
           children: [
             // Sidebar
             Container(
-              width: 60,
+              width: 80,
               color: Colors.red[50],
               child: Column(
                 children: [
-                  SidebarButton(Icons.shopping_cart, Colors.red),
-                  SidebarButton(Icons.restaurant_menu, Colors.red),
-                  SidebarButton(Icons.settings, Colors.red),
+                  SidebarButton(Icons.person, 'Customer', Colors.red),
+                  SidebarButton(Icons.shopping_cart, 'Cart', Colors.red),
+                  SidebarButton(Icons.settings, 'Settings', Colors.red),
                 ],
               ),
             ),
             // Main content
             Expanded(
+              flex: 5,
               child: Column(
                 children: [
-                  // Category buttons
+                  // Category buttons with circular icons
                   Container(
                     color: Colors.red[100],
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          CategoryButton('FOOD'),
-                          CategoryButton('DRINK'),
-                          CategoryButton('DESSERT'),
-                          CategoryButton('OTHER'),
-                          CategoryButton('OTHER'),
-                          CategoryButton('OTHER'),
-                          CategoryButton('OTHER'),
-                        ],
-                      ),
-                    ),
-                  ),
-                  // Subcategory buttons
-                  Container(
-                    color: Colors.red[50],
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          CategoryButton('SOUP'),
-                          CategoryButton('SALAD'),
-                          CategoryButton('BBQ'),
-                          CategoryButton('CURRIES'),
-                          CategoryButton('STIR FRIED'),
-                          CategoryButton('NOODLES & RICE'),
-                          CategoryButton('SPECIAL'),
-                        ],
-                      ),
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: Column(
+                      children: [
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              CircularCategoryButton('FOOD', isSelected: true),
+                              CircularCategoryButton('DRINK'),
+                              CircularCategoryButton('DESSERT'),
+                              CircularCategoryButton('OTHER'),
+                              CircularCategoryButton('OTHER'),
+                              CircularCategoryButton('OTHER'),
+                              CircularCategoryButton('OTHER'),
+                            ],
+                          ),
+                        ),
+                        Divider(color: Colors.redAccent),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SubCategoryButton('SOUP'),
+                              SubCategoryButton('SALAD'),
+                              SubCategoryButton('BBQ'),
+                              SubCategoryButton('CURRIES'),
+                              SubCategoryButton('STIR FRIED'),
+                              SubCategoryButton('NOODLES & RICE'),
+                              SubCategoryButton('SPECIAL'),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   // Items grid
@@ -72,6 +77,7 @@ class POSPage extends StatelessWidget {
                           crossAxisCount: 3,
                           crossAxisSpacing: 8,
                           mainAxisSpacing: 8,
+                          childAspectRatio: 1,
                         ),
                         itemCount: 9,
                         itemBuilder: (context, index) {
@@ -84,10 +90,29 @@ class POSPage extends StatelessWidget {
               ),
             ),
             // New order section
-            Container(
-              width: 300,
-              color: Colors.white,
-              child: NewOrderSection(),
+            Expanded(
+              flex: 2,
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(16),
+                    color: Colors.red[100],
+                    child: Column(
+                      children: [
+                        Text(
+                          'LOGO POS',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(child: NewOrderSection()),
+                ],
+              ),
             ),
           ],
         ),
@@ -98,18 +123,76 @@ class POSPage extends StatelessWidget {
 
 class SidebarButton extends StatelessWidget {
   final IconData icon;
+  final String label;
   final Color color;
 
-  SidebarButton(this.icon, this.color);
+  SidebarButton(this.icon, this.label, this.color);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: IconButton(
-        icon: Icon(icon),
-        color: color,
-        onPressed: () {},
+      child: Column(
+        children: [
+          Icon(icon, color: color),
+          SizedBox(height: 4),
+          Text(label, style: TextStyle(color: color, fontSize: 12)),
+        ],
+      ),
+    );
+  }
+}
+
+class CircularCategoryButton extends StatelessWidget {
+  final String label;
+  final bool isSelected;
+
+  CircularCategoryButton(this.label, {this.isSelected = false});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Column(
+        children: [
+          CircleAvatar(
+            radius: 28,
+            backgroundColor: isSelected ? Colors.red : Colors.red[200],
+            child: CircleAvatar(
+              radius: 26,
+              backgroundColor: Colors.red[50],
+            ),
+          ),
+          SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.red : Colors.black,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SubCategoryButton extends StatelessWidget {
+  final String label;
+
+  SubCategoryButton(this.label);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Text(
+        label,
+        style: TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.normal,
+          fontSize: 14,
+        ),
       ),
     );
   }

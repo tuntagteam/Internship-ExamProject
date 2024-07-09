@@ -5,6 +5,7 @@ class NewOrderSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(8),
+      color: Colors.red[50],
       child: Column(
         children: [
           Container(
