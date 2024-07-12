@@ -14,7 +14,9 @@ class NewOrderSection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('New Order', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                Text('New Order',
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 Text('Customer: 5'),
                 Text('Table: 01'),
                 Text('29 December 2022'),
@@ -27,7 +29,8 @@ class NewOrderSection extends StatelessWidget {
               itemCount: 4,
               itemBuilder: (context, index) {
                 return ListTile(
-                  contentPadding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
                   title: Text('ITEM NAME'),
                   subtitle: Text('option1, option2'),
                   trailing: Column(
@@ -38,12 +41,14 @@ class NewOrderSection extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           IconButton(
-                            icon: Icon(Icons.remove_circle_outline, color: Colors.red),
+                            icon: Icon(Icons.remove_circle_outline,
+                                color: Colors.red),
                             onPressed: () {},
                           ),
                           Text('1'),
                           IconButton(
-                            icon: Icon(Icons.add_circle_outline, color: Colors.red),
+                            icon: Icon(Icons.add_circle_outline,
+                                color: Colors.red),
                             onPressed: () {},
                           ),
                         ],
@@ -97,8 +102,12 @@ class OrderSummaryRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontWeight: isBold ? FontWeight.bold : FontWeight.normal)),
-          Text(value, style: TextStyle(fontWeight: isBold ? FontWeight.bold : FontWeight.normal)),
+          Text(label,
+              style: TextStyle(
+                  fontWeight: isBold ? FontWeight.bold : FontWeight.normal)),
+          Text(value,
+              style: TextStyle(
+                  fontWeight: isBold ? FontWeight.bold : FontWeight.normal)),
         ],
       ),
     );
